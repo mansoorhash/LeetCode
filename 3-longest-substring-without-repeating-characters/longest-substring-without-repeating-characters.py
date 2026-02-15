@@ -1,20 +1,13 @@
-class Solution(object):
-    def lengthOfLongestSubstring(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        longest = []
-        temp = []
-        for c in s:
-            if c not in temp:
-                temp.append(c)
-            else:
-                for i,j in enumerate(temp):
-                    if j == c:
-                        t = temp[i+1:]
-                temp = t
-                temp.append(c)
-            if len(temp) > len(longest):
-                longest = temp
-        return len(longest)
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if len(s) == 0: return 0
+        left = 0
+        right = 0
+        last = {}
+        best = 0
+        for i, c in enumerate(s):
+            if c in last and last[c] >= left: left = last[c] + 1
+            last[c]=i
+            right = i
+            best = max(best, right - left + 1)
+        return best
