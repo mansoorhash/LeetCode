@@ -9,5 +9,5 @@ class Solution:
             if c in last and last[c] >= left: left = last[c] + 1
             last[c]=i
             right = i
-            best = max(best, right - left + 1)
+            if right - left + 1 > best: best = right - left + 1
         return best
