@@ -5,9 +5,7 @@ class Solution:
         result = 0
         for n in nums:
             s += n
-            diff = s - k
-            
-            result += count.get(diff, 0)
+            result += count.get(s - k, 0)
             count[s] = count.get(s, 0) + 1
         return result
                 
