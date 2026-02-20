@@ -1,10 +1,13 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        v = {}
+        from collections import defaultdict
+
+        v = defaultdict(list)
         for word in strs:
-            key = "".join(sorted(word))
-            if key not in v:
-                v[key] = []
+            letters = [0]*26
+            for c in word:
+                letters[ord(c) - ord('a')] += 1
+            key = tuple(letters)
             v[key].append(word)
 
         return list(v.values())
