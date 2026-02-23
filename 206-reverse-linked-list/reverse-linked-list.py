@@ -8,9 +8,8 @@ class Solution:
         if not head or head.next == None: return head
         prev = None
         curr = head
-        next_pos = head.next
 
-        while next_pos:
+        while curr:
             next_pos = curr.next
             curr.next = prev
             prev = curr
