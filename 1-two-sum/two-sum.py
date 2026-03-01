@@ -1,12 +1,9 @@
-class Solution(object):
-    def twoSum(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
-
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        v = {}
         for i, n in enumerate(nums):
-            sum = target - n
-            if sum in nums and nums.index(sum) != i:
-                return [i, nums.index(sum)] 
+            s = target - n
+            if s in v:
+                return [v[s], i]
+            v[n] = i
+        return []
