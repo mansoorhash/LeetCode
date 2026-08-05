@@ -12,16 +12,14 @@ class Solution:
         }
 
         from collections import deque
-        res = []
         q = deque(mapping[digits[0]])
         for n in digits[1:]:
             n_list = []
-            if n in mapping:
-                while q:
-                    val = q.popleft()
-                    for c in mapping[n]:
-                        n_list.append(val+c)
-                q = deque(n_list)
+            while q:
+                val = q.popleft()
+                for c in mapping[n]:
+                    n_list.append(val+c)
+            q = deque(n_list)
 
         return list(q)
 
