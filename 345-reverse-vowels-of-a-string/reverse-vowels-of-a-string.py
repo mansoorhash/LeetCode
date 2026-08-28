@@ -5,16 +5,13 @@ class Solution:
         l = 0
         r = len(s)-1
         while l < r:
-            left_c = s[l].lower()
-            if left_c in vowels:
-                while s[r].lower() not in vowels:
-                    r -= 1
-                if l > r: break
-                move_c = s[r]
-                s[r] = s[l]
-                s[l] = move_c
+            while l < r and s[l].lower() not in vowels: l +=1
+            while l < r and s[r].lower() not in vowels: r -=1
+
+            if l < r:
+                s[l], s[r] = s[r], s[l]
                 r -= 1
-            l += 1
+                l +=1
         return "".join(s)
 
 
