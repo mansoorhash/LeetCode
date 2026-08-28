@@ -1,13 +1,13 @@
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
         from collections import Counter
-        r_l = Counter(ransomNote)
         m_l = Counter(magazine)
         
-        for c, num in r_l.items():
+        for c in ransomNote:
             if c not in m_l:
                 return False
-            if num > m_l[c]:
+            if m_l[c] == 0:
                 return False
+            m_l[c] -= 1
         return True
 
