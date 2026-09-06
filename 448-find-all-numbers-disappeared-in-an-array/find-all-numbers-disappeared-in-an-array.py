@@ -1,9 +1,6 @@
 class Solution:
     def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
-
-        from collections import Counter
-
-        count = Counter(nums)
+        count = set(nums)
         missing = []
 
         for n in range(len(nums)):
