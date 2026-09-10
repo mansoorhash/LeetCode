@@ -3,7 +3,10 @@ class Solution:
         ls = len(s)
         for i in range(1, ls//2+1):
             sRange = s[:i]
-            multiple = ls // len(sRange)
-            if multiple*sRange == s:
+            if ls%i != 0: continue
+
+            multiple = ls // i
+
+            if sRange * multiple == s:
                 return True
         return False
