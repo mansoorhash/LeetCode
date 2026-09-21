@@ -1,11 +1,7 @@
 class Spreadsheet:
 
     def __init__(self, rows: int):
-        self.sheet = {
-            f"{chr(i)}{r+1}": 0
-            for r in range(rows)
-            for i in range(65, 91)
-        }
+        self.sheet = defaultdict(int)
         
 
     def setCell(self, cell: str, value: int) -> None:
