@@ -3,7 +3,8 @@ class Solution:
         import heapq
         heap = []
         for n in nums:
-            heapq.heappush(heap, n)
-            if len(heap) > k:
-                heapq.heappop(heap)
-        return heapq.heappop(heap)
+            heap.append(-n)
+        heapq.heapify(heap)
+        for _ in range(k-1):
+            heapq.heappop(heap)
+        return -heapq.heappop(heap)
