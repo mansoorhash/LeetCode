@@ -12,12 +12,10 @@ class Solution:
         result = []
         while q:
             nodes_floor = len(q)
-            count = 0
             result.append([])
-            while q and count < nodes_floor:
+            for _ in range(nodes_floor):
                 node = q.popleft()
                 result[-1].append(node.val)
-                count += 1
                 if node.left:
                     q.append(node.left) 
                 if node.right:
