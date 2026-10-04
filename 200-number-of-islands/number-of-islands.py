@@ -2,25 +2,24 @@ class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         islands = 0
         from collections import deque
-        
 
-        rowSize = len(grid)
-        colSize = len(grid[0])
-
-        for r in range(rowSize):
-            for c in range(colSize):
-                if grid[r][c] == "1":
+        q = deque([])
+        for r_idx, row in enumerate(grid):
+            for c_idx, val in enumerate(row):
+                if val == "1":
+                    grid[r_idx][c_idx] = "0"
+                    q.append((r_idx, c_idx))
                     islands += 1
-                    queue = deque([(r,c)])
-                    grid[r][c] = "0"
+                    while q:
+                        x, y = q.popleft()
+                        for i, j in ((1, 0), (-1,0),(0,-1),(0,1)):
+                            new_r = i + x
+                            new_c = j + y
 
-                    while queue:
-                        i, j = queue.popleft()
-
-                        for di, dj in ((1,0),(-1,0),(0,1),(0,-1)):
-                            m, n = i+di, dj+j
-                            if 0 <= m < rowSize and 0<= n < colSize:
-                                if grid[m][n] == "1":
-                                    grid[m][n] = "0"
-                                    queue.append((m,n))
+                            if 0 > new_r or new_r > len(grid)-1 or 0 > new_c or new_c > len(grid[0]) -1 :
+                                continue
+                            
+                            if grid[new_r][new_c] == "1":
+                                grid[new_r][new_c] = "0"
+                                q.append((new_r, new_c))
         return islands
