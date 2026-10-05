@@ -1,20 +1,23 @@
 class Solution:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
-        rows, cols = len(image), len(image[0])
-        startColor = image[sr][sc]
-
-        if startColor == color: return image
-
+        selected_color = int(image[sr][sc])
         from collections import deque
 
-        queue = deque([(sr,sc)])
-        image[sr][sc] = color
+        q = deque([(sr, sc)])
 
-        while queue:
-            x, y = queue.popleft()
-            for i, j in ((1,0),(-1,0),(0,1),(0,-1)):
-                nx, ny = x+i, y+j
-                if 0 <= nx < rows and 0 <= ny < cols and image[nx][ny] == startColor:
-                    queue.append((nx,ny))
-                    image[nx][ny] = color
+        while q:
+            r, c = q.popleft()
+            if image[r][c] != color and image[r][c] == selected_color:
+                image[r][c] = color
+            
+                for x, y in ((1,0),(0,1),(-1,0),(0,-1)):
+                    new_sr = r + x
+                    new_sc = c + y
+                    if new_sr < 0 or new_sr > len(image)- 1:
+                        continue
+                    if new_sc < 0 or new_sc > len(image[0]) - 1:
+                        continue
+                    if image[new_sr][new_sc] == selected_color:
+                        q.append((new_sr, new_sc))
+
         return image
