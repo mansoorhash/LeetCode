@@ -1,30 +1,28 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: list[list[int]]) -> list[int]:
-        pre = {i:[] for i in range(numCourses)}
-        for crs, preq in prerequisites:
-            pre[crs].append(preq)
-
+        pre = {crs: [] for crs in range(numCourses)}
+        for a, b in prerequisites:
+            pre[a].append(b)
         order = []
-        visited = set()
-        cycle = set()
+        takenCourse = set()
+        loop = set()
 
         def dfs(crs):
-            if crs in cycle: return False
-            if crs in visited: return True
-            cycle.add(crs)
+            if crs in takenCourse: return True
+            if crs in loop: return False
+            loop.add(crs)
 
-            for p in pre[crs]:
-                if dfs(p) == False:
+            for c in pre[crs]:
+                if dfs(c) == False:
                     return False
-            cycle.remove(crs)
-            visited.add(crs)
+            
+            loop.remove(crs)
+            takenCourse.add(crs)
             order.append(crs)
             return True
 
-        for n in range(numCourses):
-            if dfs(n) == False:
-                return []
-
+        for c in range(numCourses):
+            if not dfs(c): return []
         return order
                 
 
